@@ -31,8 +31,6 @@ stages:
             steps:
               - script: echo Compile Code - ${COMPONENT}
                 name: CompileCode
-
-Stages:
   - stage: TestCases
     condition: in(dependencies.CompileCode.result, 'Succeeded')
     #condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags'))
