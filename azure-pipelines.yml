@@ -31,9 +31,12 @@ stages:
             steps:
               - script: echo Compile Code - ${COMPONENT}
                 name: CompileCode
+
+
   - stage: TestCases
-    condition: in(dependencies.CompileCode.result, 'Succeeded')
-    #condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags'))
+    #condition: in(dependencies.CompileCode.result, 'Succeeded')
+
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags'))
     jobs:
       - job: TestCases
         steps:
@@ -45,4 +48,4 @@ stages:
         steps:
           - script: echo Test Cases
             name: TestCases
--  # template: test.yml@shared-library
+-  template: test.yml@shared-library
